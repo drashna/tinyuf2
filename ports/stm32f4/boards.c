@@ -96,6 +96,10 @@ void board_init(void)
   UartHandle.Init.Mode       = UART_MODE_TX_RX;
   HAL_UART_Init(&UartHandle);
 #endif
+
+#if PROTECT_BOOTLOADER
+  board_flash_protect_bootloader();
+#endif
 }
 
 void board_dfu_init(void)
@@ -222,8 +226,6 @@ void board_app_jump(void)
   SysTick->CTRL = 0;
   SysTick->LOAD = 0;
   SysTick->VAL = 0;
-
-  // TODO protect bootloader region
 
   /* switch exception handlers to the application */
   SCB->VTOR = (uint32_t) BOARD_FLASH_APP_START;
