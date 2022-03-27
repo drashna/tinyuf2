@@ -38,13 +38,13 @@
 //--------------------------------------------------------------------+
 
 //// Number of neopixels
-#define NEOPIXEL_NUMBER       0
+#define NEOPIXEL_NUMBER       21
 
-//#define NEOPIXEL_PORT         GPIOC
-//#define NEOPIXEL_PIN          GPIO_PIN_0
-//
-//// Brightness percentage from 1 to 255
-//#define NEOPIXEL_BRIGHTNESS   0x10
+#define NEOPIXEL_PORT         GPIOA
+#define NEOPIXEL_PIN          GPIO_PIN_1
+
+// Brightness percentage from 1 to 255
+#define NEOPIXEL_BRIGHTNESS   0x96
 
 
 //--------------------------------------------------------------------+
@@ -68,7 +68,7 @@
 #define USB_VID           0x239B
 #define USB_PID           0x0069
 #define USB_MANUFACTURER  "Bastardkb"
-#define USB_PRODUCT       "Charybdis BlackPill"
+#define USB_PRODUCT       "Charybdis Nano BlackPill"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
 #define UF2_BOARD_ID      "Charybdis STM32F411 BlackPill"
