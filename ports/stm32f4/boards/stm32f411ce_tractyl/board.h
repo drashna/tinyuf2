@@ -38,7 +38,7 @@
 //--------------------------------------------------------------------+
 
 // Number of neopixels
-#define NEOPIXEL_NUMBER       21
+#define NEOPIXEL_NUMBER       26
 // Brightness percentage from 1 to 255
 #define NEOPIXEL_BRIGHTNESS   0x90
 
@@ -70,9 +70,9 @@
 #define USB_PRODUCT       "Charybdis BlackPill"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
-#define UF2_BOARD_ID      "Charybdis STM32F411 BlackPill"
-#define UF2_VOLUME_LABEL  "Charybdis"
-#define UF2_INDEX_URL     "https://github.com/Bastardkb/Charybdis"
+#define UF2_BOARD_ID      "Tractyl Manuform STM32F411 BlackPill"
+#define UF2_VOLUME_LABEL  "TractylM"
+#define UF2_INDEX_URL     "https://github.com/qmk/qmk_firmware/tree/master/keyboards/handwired/tractyl_manuform"
 
 #define USB_NO_VBUS_PIN   1
 

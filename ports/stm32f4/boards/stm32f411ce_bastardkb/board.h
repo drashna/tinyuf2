@@ -38,7 +38,7 @@
 //--------------------------------------------------------------------+
 
 // Number of neopixels
-#define NEOPIXEL_NUMBER       21
+#define NEOPIXEL_NUMBER       29
 // Brightness percentage from 1 to 255
 #define NEOPIXEL_BRIGHTNESS   0x90
 
@@ -66,12 +66,12 @@
 
 #define USB_VID           0x239A
 #define USB_PID           0x0069
-#define USB_MANUFACTURER  "Drashna"
-#define USB_PRODUCT       "Tractyl Manuform"
+#define USB_MANUFACTURER  "BastardKB"
+#define USB_PRODUCT       "Charybdis"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
-#define UF2_BOARD_ID      "Tractyl Manuform STM32F411 BlackPill"
-#define UF2_VOLUME_LABEL  "TractylBOOT"
+#define UF2_BOARD_ID      "Charybdis STM32F411 BlackPill"
+#define UF2_VOLUME_LABEL  "Charybdis"
 #define UF2_INDEX_URL     "https://github.com/drashna/"
 
 #define USB_NO_VBUS_PIN   1
