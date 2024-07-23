@@ -29,6 +29,10 @@
 // Button
 //--------------------------------------------------------------------+
 
+#define BUTTON_PORT           GPIOC
+#define BUTTIN_PIN            GPIO_PIN_13
+#define BUTTON_STATE_ACTIVE   1
+
 //--------------------------------------------------------------------+
 // LED
 //--------------------------------------------------------------------+
@@ -42,10 +46,10 @@
 //--------------------------------------------------------------------+
 
 // Number of neopixels
-#define NEOPIXEL_NUMBER       0
+#define NEOPIXEL_NUMBER       34
 
 #define NEOPIXEL_PORT         GPIOC
-#define NEOPIXEL_PIN          GPIO_PIN_0
+#define NEOPIXEL_PIN          GPIO_PIN_6
 #define NEOPIXEL_PIN_MODE     GPIO_MODE_OUTPUT_PP
 
 //--------------------------------------------------------------------+
