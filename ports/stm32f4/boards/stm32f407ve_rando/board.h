@@ -29,17 +29,17 @@
 // Button
 //--------------------------------------------------------------------+
 
-#define BUTTON_PORT           GPIOC
-#define BUTTIN_PIN            GPIO_PIN_13
-#define BUTTON_STATE_ACTIVE   1
+#define BUTTON_PORT           GPIOA
+#define BUTTIN_PIN            GPIO_PIN_15
+#define BUTTON_STATE_ACTIVE   0
 
 //--------------------------------------------------------------------+
 // LED
 //--------------------------------------------------------------------+
 
-#define LED_PORT              GPIOB
-#define LED_PIN               GPIO_PIN_2
-#define LED_STATE_ON          1
+#define LED_PORT              GPIOC
+#define LED_PIN               GPIO_PIN_13
+#define LED_STATE_ON          0
 
 //--------------------------------------------------------------------+
 // Neopixel
@@ -57,7 +57,7 @@
 //--------------------------------------------------------------------+
 
 // Flash size of the board
-#define BOARD_FLASH_SIZE      (512 * 1024)
+#define BOARD_FLASH_SIZE      (1024 * 1024)
 
 //--------------------------------------------------------------------+
 // USB UF2
