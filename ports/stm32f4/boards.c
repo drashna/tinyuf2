@@ -54,6 +54,24 @@ void board_init(void)
 
   GPIO_InitTypeDef  GPIO_InitStruct;
 
+#ifdef LCD_RST_PIN
+  GPIO_InitStruct.Pin = LCD_RST_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(LCD_RST_PORT, &GPIO_InitStruct);
+  HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, LCD_RST_STATE_ACTIVE);
+#endif
+
+#ifdef LCD_BL_PIN
+  GPIO_InitStruct.Pin = LCD_BL_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(LCD_BL_PORT, &GPIO_InitStruct);
+  HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN, LCD_BL_STATE_ACTIVE);
+#endif
+
 #ifdef BUTTON_PIN
   GPIO_InitStruct.Pin = BUTTON_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
