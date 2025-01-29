@@ -127,12 +127,22 @@ void board_dfu_init(void)
   // PA9- VUSB, PA10- ID, PA11- DM, PA12- DP
 
   /* Configure DM DP Pins */
+#ifdef USB_OTG_HS_ENABLE
+/* Configure DM DP Pins */
+  GPIO_InitStruct.Pin = GPIO_PIN_14 | GPIO_PIN_15;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Alternate = GPIO_AF12_OTG_HS_FS;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#else
   GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#endif
 
   /* Configure VBUS Pin */
 #ifndef USB_NO_VBUS_PIN
@@ -143,15 +153,32 @@ void board_dfu_init(void)
 #endif
 
   /* This for ID line debug */
+#ifdef USB_OTG_HS_ENABLE
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF12_OTG_HS_FS;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#else
   GPIO_InitStruct.Pin = GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#endif
 
   // Enable USB OTG clock
+#ifdef USB_OTG_HS_ENABLE
+  __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+#define USB_OTG_DEVICE                  USB_OTG_HS
+#else
   __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
+#define USB_OTG_DEVICE                  USB_OTG_FS
+#endif
+
+
 
 #if defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || \
     defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || \
@@ -159,27 +186,27 @@ void board_dfu_init(void)
 
   #ifdef USB_NO_VBUS_PIN
     /* Deactivate VBUS Sensing B */
-    USB_OTG_FS->GCCFG &= ~USB_OTG_GCCFG_VBDEN;
+    USB_OTG_DEVICE->GCCFG &= ~USB_OTG_GCCFG_VBDEN;
 
     /* B-peripheral session valid override enable */
-    USB_OTG_FS->GOTGCTL |= USB_OTG_GOTGCTL_BVALOEN;
-    USB_OTG_FS->GOTGCTL |= USB_OTG_GOTGCTL_BVALOVAL;
+    USB_OTG_DEVICE->GOTGCTL |= USB_OTG_GOTGCTL_BVALOEN;
+    USB_OTG_DEVICE->GOTGCTL |= USB_OTG_GOTGCTL_BVALOVAL;
 
-    USB_OTG_FS->GCCFG &= ~(USB_OTG_GCCFG_BCDEN);
+    USB_OTG_DEVICE->GCCFG &= ~(USB_OTG_GCCFG_BCDEN);
   #else
     // Enable VBUS sense (B device) via pin PA9
-    USB_OTG_FS->GCCFG |= USB_OTG_GCCFG_VBDEN;
+    USB_OTG_DEVICE->GCCFG |= USB_OTG_GCCFG_VBDEN;
   #endif
 
 #else
 
   #ifdef USB_NO_VBUS_PIN
     // Disable VBUS sense
-    USB_OTG_FS->GCCFG |= USB_OTG_GCCFG_NOVBUSSENS;
+    USB_OTG_DEVICE->GCCFG |= USB_OTG_GCCFG_NOVBUSSENS;
   #else
     // Enable VBUS sense (B device) via pin PA9
-    USB_OTG_FS->GCCFG &= ~USB_OTG_GCCFG_NOVBUSSENS;
-    USB_OTG_FS->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
+    USB_OTG_DEVICE->GCCFG &= ~USB_OTG_GCCFG_NOVBUSSENS;
+    USB_OTG_DEVICE->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
   #endif
 
 #endif
