@@ -192,7 +192,7 @@ erase-pyocd:
 
 # flash using ROM bootloader
 flash-dfu-util: $(BUILD)/$(OUTNAME).bin
-	dfu-util -R -a 0 --dfuse-address 0x08000000 -D $<
+	dfu-util -R -a 0 -d 0483:df11 --dfuse-address 0x08000000 -D $<
 
 erase-dfu-util:
 	dfu-util -R -a 0 --dfuse-address 0x08000000:mass-erase:force
