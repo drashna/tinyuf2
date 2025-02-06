@@ -130,7 +130,7 @@ void board_dfu_init(void)
 #ifdef USB_OTG_HS_ENABLE
 /* Configure DM DP Pins */
   GPIO_InitStruct.Pin = GPIO_PIN_14 | GPIO_PIN_15;
-  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Alternate = GPIO_AF12_OTG_HS_FS;
@@ -426,6 +426,9 @@ int board_uart_write(void const * buf, int len)
 void OTG_FS_IRQHandler(void)
 {
   tud_int_handler(0);
+#ifdef USB_OTG_HS_ENABLE
+  tud_int_handler(1);
+#endif
 }
 #endif
 
