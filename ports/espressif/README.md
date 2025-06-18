@@ -22,6 +22,7 @@ Following boards are supported:
 - [LILYGO® TTGO T8 ESP32-S2-WROOM](http://www.lilygo.cn/prod_view.aspx?TypeId=50063&Id=1320&FId=t3:50063:3)
 - [LILYGO® TTGO T-Beam Supreme](https://www.lilygo.cc/products/softrf-t-beamsupreme)
 - [LILYGO® TTGO T-TWR Plus](https://www.lilygo.cc/products/t-twr-plus)
+- [LILYGO® T-Dongle S3](https://www.lilygo.cc/products/t-dongle-s3)
 - [LOLIN Wemos® S2 Pico](https://www.wemos.cc/en/latest/s2/s2_pico.html)
 - [Maker badge](https://github.com/dronecz/maker_badge)
 - [MicroDev microS2](https://github.com/microDev1/microS2/wiki)
@@ -38,7 +39,7 @@ Following boards are supported:
 Once installed and setup ESP-IDF, you can build with all target
 
 ```
-make BOARD=adafruit_feather_esp32s2 all
+idf.py -DBOARD=adafruit_feather_esp32s2 build
 ```
 
 ### Flash
@@ -46,7 +47,7 @@ make BOARD=adafruit_feather_esp32s2 all
 You could flash it with flash target
 
 ```
-make BOARD=adafruit_feather_esp32s2 flash
+idf.py -DBOARD=adafruit_feather_esp32s2 flash
 ```
 
 or you could also use pre-built binaries from [release page](https://github.com/adafruit/tinyuf2/releases). Extract and run following esptool commands
@@ -114,17 +115,4 @@ NOTE: uf2 bootloader, customized 2nd bootloader and partition table can be overw
 
 ## Partition
 
-Following is typical partition for 4MB flash, check out the `partition-xMB.csv` for details.
-
-```
-# Name,   Type, SubType, Offset,  Size, Flags
-# bootloader.bin,,          0x1000, 32K
-# partition table,          0x8000, 4K
-
-nvs,      data, nvs,      0x9000,  20K,
-otadata,  data, ota,      0xe000,  8K,
-ota_0,    0,    ota_0,   0x10000,  1408K,
-ota_1,    0,    ota_1,  0x170000,  1408K,
-uf2,      app,  factory,0x2d0000,  256K,
-ffat,     data, fat,    0x310000,  960K,
-```
+Each board has its own flash size and partition table. check out the one in `boards/BOARD/sdkconfig` and `partition-xMB.csv` for details
