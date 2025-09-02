@@ -37,9 +37,9 @@
 // LED
 //--------------------------------------------------------------------+
 
-// #define LED_PORT              GPIOB
-// #define LED_PIN               GPIO_PIN_2
-// #define LED_STATE_ON          1
+#define LED_PORT              GPIOC
+#define LED_PIN               GPIO_PIN_13
+#define LED_STATE_ON          1
 
 //--------------------------------------------------------------------+
 // Neopixel
@@ -86,7 +86,7 @@
 #define UF2_INDEX_URL     "https://github.com/chrisrotter/arcboard-stm32"
 
 #define USB_NO_VBUS_PIN   1
-// #define TINYUF2_PROTECT_BOOTLOADER 0
+#define TINYUF2_PROTECT_BOOTLOADER 0
 
 //--------------------------------------------------------------------+
 // UART

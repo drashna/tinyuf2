@@ -1,6 +1,7 @@
 CFLAGS += \
   -DSTM32F405xx \
-  -DHSE_VALUE=8000000U
+  -DHSE_VALUE=8000000U \
+  -Wno-unterminated-string-initialization
 
 SRC_S += \
   $(ST_CMSIS)/Source/Templates/gcc/startup_stm32f405xx.s
