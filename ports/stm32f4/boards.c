@@ -56,7 +56,7 @@ void board_init(void) {
   __HAL_RCC_GPIOD_CLK_ENABLE();
 #endif
 
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  //GPIO_InitTypeDef  GPIO_InitStruct;
 
 #ifdef LCD_RST_PIN
   GPIO_InitStruct.Pin = LCD_RST_PIN;
