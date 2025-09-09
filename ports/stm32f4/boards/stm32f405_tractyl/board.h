@@ -29,8 +29,8 @@
 // Button
 //--------------------------------------------------------------------+
 
-// #define BUTTON_PORT           GPIOC
-// #define BUTTIN_PIN            GPIO_PIN_13
+#define BUTTON_PORT           GPIOC
+#define BUTTIN_PIN            GPIO_PIN_13
 #define BUTTON_STATE_ACTIVE   1
 
 //--------------------------------------------------------------------+
@@ -51,27 +51,27 @@
 #define NEOPIXEL_BRIGHTNESS   0x7F
 
 #define NEOPIXEL_PORT         GPIOC
-#define NEOPIXEL_PIN          GPIO_PIN_9
+#define NEOPIXEL_PIN          GPIO_PIN_6
 #define NEOPIXEL_PIN_MODE     GPIO_MODE_OUTPUT_PP
 
 //--------------------------------------------------------------------+
 // LCD
 //--------------------------------------------------------------------+
 
-#define LCD_RST_PORT           GPIOB
-#define LCD_RST_PIN            GPIO_PIN_1
-#define LCD_RST_STATE_ACTIVE   1
+// #define LCD_RST_PORT           GPIOB
+// #define LCD_RST_PIN            GPIO_PIN_13
+// #define LCD_RST_STATE_ACTIVE   1
 
-#define LCD_BL_PORT            GPIOB
-#define LCD_BL_PIN             GPIO_PIN_2
+#define LCD_BL_PORT            GPIOC
+#define LCD_BL_PIN             GPIO_PIN_7
 #define LCD_BL_STATE_ACTIVE    1
+
 //--------------------------------------------------------------------+
 // Flash
 //--------------------------------------------------------------------+
 
 // Flash size of the board
 #define BOARD_FLASH_SIZE      (1024 * 1024)
-#define TINYUF2_PROTECT_BOOTLOADER    0
 
 //--------------------------------------------------------------------+
 // USB UF2
@@ -79,13 +79,13 @@
 
 #define USB_VID           0x239A
 #define USB_PID           0x0070
-#define USB_MANUFACTURER  "Crazymittens"
-#define USB_PRODUCT       "ArcBoard MK20"
+#define USB_MANUFACTURER  "Drashna Jaelre"
+#define USB_PRODUCT       "Tractyl Manuform STM32F405"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
-#define UF2_BOARD_ID      "STM32F405-ArcBoard"
-#define UF2_VOLUME_LABEL  "ARCF405BOOT"
-#define UF2_INDEX_URL     "https://github.com/christrotter/arcboard-stm32"
+#define UF2_BOARD_ID      "Tractyl Manuform STM32F405"
+#define UF2_VOLUME_LABEL  "TMF405BOOT"
+#define UF2_INDEX_URL     "https://github.com/WeActStudio/WeActStudio.STM32F4_64Pin_CoreBoard/tree/master"
 
 #define USB_NO_VBUS_PIN   1
 
@@ -118,8 +118,9 @@ static inline void clock_init(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /* Enable HSE Oscillator and activate PLL with HSE as source */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE|RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = HSE_VALUE/1000000;
