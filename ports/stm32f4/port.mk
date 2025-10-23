@@ -17,7 +17,7 @@ CFLAGS += \
   -DCFG_TUSB_MCU=OPT_MCU_STM32F4
 
 # suppress warning caused by vendor mcu driver
-CFLAGS += -Wno-error=cast-align -Wno-error=unused-parameter -Wno-error=unterminated-string-initialization
+CFLAGS += -Wno-error=cast-align -Wno-error=unused-parameter
 
 # default linker file
 ifdef BUILD_APPLICATION

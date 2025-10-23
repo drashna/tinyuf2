@@ -165,7 +165,8 @@ CFLAGS += \
   -Wsign-compare \
   -Wmissing-format-attribute \
   -Wunreachable-code \
-  -Wcast-align
+  -Wcast-align \
+  -Wno-error=unterminated-string-initialization
 
 # Linker Flags
 LDFLAGS += \
