@@ -55,7 +55,7 @@
 //--------------------------------------------------------------------+
 
 // Flash size of the board
-#define BOARD_FLASH_SIZE      (1024 * 1024)
+#define BOARD_FLASH_SIZE      (2 * 1024 * 1024)
 
 // Don't protect bootloader during debugging
 #define TINYUF2_PROTECT_BOOTLOADER 0
