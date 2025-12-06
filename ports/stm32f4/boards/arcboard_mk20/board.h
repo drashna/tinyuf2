@@ -37,8 +37,8 @@
 // LED
 //--------------------------------------------------------------------+
 
-#define LED_PORT              GPIOB
-#define LED_PIN               GPIO_PIN_2
+#define LED_PORT              GPIOC
+#define LED_PIN               GPIO_PIN_0
 #define LED_STATE_ON          1
 
 //--------------------------------------------------------------------+
@@ -46,12 +46,12 @@
 //--------------------------------------------------------------------+
 
 // Number of neopixels
-#define NEOPIXEL_NUMBER       34
+#define NEOPIXEL_NUMBER       120
 // Brightness percentage from 1 to 255
-#define NEOPIXEL_BRIGHTNESS   0x7F
+#define NEOPIXEL_BRIGHTNESS   0x5A
 
-#define NEOPIXEL_PORT         GPIOC
-#define NEOPIXEL_PIN          GPIO_PIN_9
+#define NEOPIXEL_PORT         GPIOA
+#define NEOPIXEL_PIN          GPIO_PIN_8
 #define NEOPIXEL_PIN_MODE     GPIO_MODE_OUTPUT_PP
 
 //--------------------------------------------------------------------+
@@ -80,7 +80,7 @@
 #define USB_VID           0x239A
 #define USB_PID           0x0070
 #define USB_MANUFACTURER  "Crazymittens"
-#define USB_PRODUCT       "ArcBoard MK20"
+#define USB_PRODUCT       "ArcBoard MK20.1"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
 #define UF2_BOARD_ID      "STM32F405-ArcBoard"
