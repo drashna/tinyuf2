@@ -33,8 +33,8 @@
 // LED
 //--------------------------------------------------------------------+
 
-#define LED_PORT              GPIOF
-#define LED_PIN               GPIO_PIN_6
+#define LED_PORT              GPIOB
+#define LED_PIN               GPIO_PIN_13
 #define LED_STATE_ON          1
 
 //--------------------------------------------------------------------+
@@ -44,7 +44,7 @@
 // Number of neopixels
 #define NEOPIXEL_NUMBER       0
 // Brightness percentage from 1 to 255
-#define NEOPIXEL_BRIGHTNESS   0x10
+#define NEOPIXEL_BRIGHTNESS   0x7F
 
 #define NEOPIXEL_PORT         GPIOC
 #define NEOPIXEL_PIN          GPIO_PIN_7
@@ -78,15 +78,15 @@
 
 #define USB_VID           0x1209
 #define USB_PID           0x4922
-#define USB_MANUFACTURER  "Waveshare"
+#define USB_MANUFACTURER  "Random Board"
 #define USB_PRODUCT       "TinyUF2 F429"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
 #define UF2_BOARD_ID      "TinyUF2-F429"
-#define UF2_VOLUME_LABEL  "WS-F429BOOT"
+#define UF2_VOLUME_LABEL  "STMF429BOOT"
 #define UF2_INDEX_URL     "https://github.com/tzarc/keyboards"
 
-// #define USB_NO_VBUS_PIN   1
+#define USB_NO_VBUS_PIN   1
 
 //--------------------------------------------------------------------+
 // UART
@@ -121,7 +121,7 @@ static inline void clock_init(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLM = 25;
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
