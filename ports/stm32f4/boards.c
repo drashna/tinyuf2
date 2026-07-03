@@ -82,6 +82,15 @@ void board_init(void) {
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
   HAL_GPIO_Init(NEOPIXEL_PORT, &GPIO_InitStruct);
+
+#ifdef NEOPIXEL_ON_PIN
+  GPIO_InitStruct.Pin = NEOPIXEL_ON_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(NEOPIXEL_ON_PORT, &GPIO_InitStruct);
+  HAL_GPIO_WritePin(NEOPIXEL_ON_PORT, NEOPIXEL_ON_PIN, NEOPIXEL_ON_STATE);
+#endif
 #endif
 
 #ifdef LCD_RST_PIN
@@ -100,8 +109,16 @@ void board_init(void) {
   GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
   HAL_GPIO_Init(LCD_BL_PORT, &GPIO_InitStruct);
   HAL_GPIO_WritePin(LCD_BL_PORT, LCD_BL_PIN, LCD_BL_STATE_ACTIVE);
-#endif
 
+#ifdef LCD_BL_ON_PIN
+  GPIO_InitStruct.Pin = LCD_BL_ON_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(LCD_BL_ON_PORT, &GPIO_InitStruct);
+  HAL_GPIO_WritePin(LCD_BL_ON_PORT, LCD_BL_ON_PIN, LCD_BL_ON_STATE);
+#endif
+#endif
 
 
 #if defined(UART_DEV) && defined(CFG_TUSB_DEBUG) && CFG_TUSB_DEBUG
@@ -237,6 +254,9 @@ void board_app_jump(void)
 
 #if NEOPIXEL_NUMBER
   HAL_GPIO_DeInit(NEOPIXEL_PORT, NEOPIXEL_PIN);
+#ifdef NEOPIXEL_ON_PIN
+  HAL_GPIO_DeInit(NEOPIXEL_ON_PORT, NEOPIXEL_ON_PIN);
+#endif
 #endif
 
 #ifdef LCD_RST_PIN
@@ -245,8 +265,10 @@ void board_app_jump(void)
 
 #ifdef LCD_BL_PIN
   HAL_GPIO_DeInit(LCD_BL_PORT, LCD_BL_PIN);
+#ifdef LCD_BL_ON_PIN
+  HAL_GPIO_DeInit(LCD_BL_ON_PORT, LCD_BL_ON_PIN);
 #endif
-
+#endif
 
 
 #if defined(UART_DEV) && defined(CFG_TUSB_DEBUG) && CFG_TUSB_DEBUG

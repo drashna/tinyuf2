@@ -54,6 +54,11 @@
 #define NEOPIXEL_PIN          GPIO_PIN_9
 #define NEOPIXEL_PIN_MODE     GPIO_MODE_OUTPUT_PP
 
+#define NEOPIXEL_ON_PORT         GPIOB
+#define NEOPIXEL_ON_PIN          GPIO_PIN_13
+#define NEOPIXEL_ON_STATE        1
+
+
 //--------------------------------------------------------------------+
 // LCD
 //--------------------------------------------------------------------+
@@ -62,9 +67,14 @@
 #define LCD_RST_PIN            GPIO_PIN_9
 #define LCD_RST_STATE_ACTIVE   1
 
-// #define LCD_BL_PORT            GPIOB
-// #define LCD_BL_PIN             GPIO_PIN_1
-// #define LCD_BL_STATE_ACTIVE    1
+#define LCD_BL_PORT            GPIOB
+#define LCD_BL_PIN             GPIO_PIN_1
+#define LCD_BL_STATE_ACTIVE    1
+
+#define LCD_BL_ON_PORT            GPIOB
+#define LCD_BL_ON_PIN             GPIO_PIN_14
+#define LCD_BL_ON_STATE           1
+
 //--------------------------------------------------------------------+
 // Flash
 //--------------------------------------------------------------------+
