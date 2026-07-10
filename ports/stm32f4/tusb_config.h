@@ -47,6 +47,14 @@
 #define BOARD_TUD_RHPORT         0
 #endif
 
+// RHPort max operational speed can be defined by board config.
+#ifndef BOARD_TUD_MAX_SPEED
+#define BOARD_TUD_MAX_SPEED      OPT_MODE_DEFAULT_SPEED
+#endif
+
+// Default is max speed that hardware controller could support with on-chip PHY.
+#define CFG_TUD_MAX_SPEED        BOARD_TUD_MAX_SPEED
+
 // can be defined by compiler in DEBUG build
 #ifndef CFG_TUSB_DEBUG
 #define CFG_TUSB_DEBUG           0

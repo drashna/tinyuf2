@@ -28,6 +28,10 @@
 #include "tusb.h"
 #endif
 
+#ifndef BOARD_TUD_RHPORT
+#define BOARD_TUD_RHPORT 0
+#endif
+
 //--------------------------------------------------------------------+
 // MACRO TYPEDEF CONSTANT ENUM DECLARATION
 //--------------------------------------------------------------------+
@@ -146,6 +150,68 @@ void board_dfu_init(void)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
 
+#if BOARD_TUD_RHPORT == 1
+  // OTG HS (internal FS PHY) pins: PB13- VBUS, PB12- ID, PB14- DM, PB15- DP
+
+  /* Configure DM DP Pins */
+  GPIO_InitStruct.Pin = GPIO_PIN_14 | GPIO_PIN_15;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Alternate = GPIO_AF12_OTG_HS_FS;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* Configure VBUS Pin */
+#ifndef USB_NO_VBUS_PIN
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#endif
+
+  /* This for ID line debug */
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF12_OTG_HS_FS;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  // Enable USB OTG clock
+  __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+
+#if defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || \
+    defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || \
+    defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx)
+
+  #ifdef USB_NO_VBUS_PIN
+    /* Deactivate VBUS Sensing B */
+    USB_OTG_HS->GCCFG &= ~USB_OTG_GCCFG_VBDEN;
+
+    /* B-peripheral session valid override enable */
+    USB_OTG_HS->GOTGCTL |= USB_OTG_GOTGCTL_BVALOEN;
+    USB_OTG_HS->GOTGCTL |= USB_OTG_GOTGCTL_BVALOVAL;
+
+    USB_OTG_HS->GCCFG &= ~(USB_OTG_GCCFG_BCDEN);
+  #else
+    // Enable VBUS sense (B device) via pin PB13
+    USB_OTG_HS->GCCFG |= USB_OTG_GCCFG_VBDEN;
+  #endif
+
+#else
+
+  #ifdef USB_NO_VBUS_PIN
+    // Disable VBUS sense
+    USB_OTG_HS->GCCFG |= USB_OTG_GCCFG_NOVBUSSENS;
+  #else
+    // Enable VBUS sense (B device) via pin PB13
+    USB_OTG_HS->GCCFG &= ~USB_OTG_GCCFG_NOVBUSSENS;
+    USB_OTG_HS->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
+  #endif
+
+#endif
+
+#else
   // USB Pin Init
   // PA9- VUSB, PA10- ID, PA11- DM, PA12- DP
 
@@ -204,6 +270,8 @@ void board_dfu_init(void)
     USB_OTG_FS->GCCFG &= ~USB_OTG_GCCFG_NOVBUSSENS;
     USB_OTG_FS->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
   #endif
+
+#endif
 
 #endif
 }
@@ -439,6 +507,11 @@ int board_uart_write(void const * buf, int len)
 void OTG_FS_IRQHandler(void)
 {
   tud_int_handler(0);
+}
+
+void OTG_HS_IRQHandler(void)
+{
+  tud_int_handler(1);
 }
 #endif
 
