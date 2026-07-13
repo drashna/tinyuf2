@@ -1,4 +1,4 @@
-set(JLINK_DEVICE stm32f42n9bi)
+set(JLINK_DEVICE stm32f429ig)
 
 function(update_board TARGET)
   target_sources(${TARGET} PUBLIC

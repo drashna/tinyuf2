@@ -34,8 +34,8 @@
 //--------------------------------------------------------------------+
 
 #define LED_PORT              GPIOE
-#define LED_PIN               GPIO_PIN_2
-#define LED_STATE_ON          1
+#define LED_PIN               GPIO_PIN_3
+#define LED_STATE_ON          0
 
 //--------------------------------------------------------------------+
 // Neopixel
@@ -84,7 +84,7 @@
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
 #define UF2_BOARD_ID      "TinyUF2-F429"
 #define UF2_VOLUME_LABEL  "F429BOOT"
-#define UF2_INDEX_URL     "https://github.com/tzarc/keyboards"
+#define UF2_INDEX_URL     "https://github.com/drashna/tinyuf2"
 
 #define USB_NO_VBUS_PIN   1
 

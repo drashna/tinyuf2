@@ -74,6 +74,7 @@
 #define UF2_BOARD_ID      "STM32F405-CoreBoard"
 #define UF2_VOLUME_LABEL  "STMF405BOOT"
 #define UF2_INDEX_URL     "https://github.com/WeActStudio/WeActStudio.STM32F4_64Pin_CoreBoard/tree/master"
+// #define BOARD_TUD_RHPORT 1
 
 #define USB_NO_VBUS_PIN   1
 
