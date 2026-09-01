@@ -377,12 +377,20 @@ void board_app_jump(void)
 
 uint8_t board_usb_get_serial(uint8_t serial_id[16])
 {
-  uint8_t const len = 12;
-  uint32_t* serial_id32 = (uint32_t*) (uintptr_t) serial_id;
+  uint8_t const len = 6;
+  volatile uint32_t const *base = STM32_UUID;
+  uint8_t uid[12];
 
-  serial_id32[0] = STM32_UUID[0];
-  serial_id32[1] = STM32_UUID[1];
-  serial_id32[2] = STM32_UUID[2];
+  for (uint8_t index = 0; index < 12; index++) {
+    uid[index] = (uint8_t)(base[index / 4] >> ((index % 4) * 8));
+  }
+
+  serial_id[0] = uid[11];
+  serial_id[1] = (uint8_t)(uid[10] + uid[2]);
+  serial_id[2] = uid[9];
+  serial_id[3] = (uint8_t)(uid[8] + uid[0]);
+  serial_id[4] = uid[7];
+  serial_id[5] = uid[6];
 
   return len;
 }
