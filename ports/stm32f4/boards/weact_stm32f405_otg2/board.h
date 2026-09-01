@@ -55,18 +55,6 @@
 #define NEOPIXEL_PIN_MODE     GPIO_MODE_OUTPUT_PP
 
 //--------------------------------------------------------------------+
-// LCD
-//--------------------------------------------------------------------+
-
-// #define LCD_RST_PORT           GPIOB
-// #define LCD_RST_PIN            GPIO_PIN_13
-// #define LCD_RST_STATE_ACTIVE   1
-
-#define LCD_BL_PORT            GPIOC
-#define LCD_BL_PIN             GPIO_PIN_7
-#define LCD_BL_STATE_ACTIVE    1
-
-//--------------------------------------------------------------------+
 // Flash
 //--------------------------------------------------------------------+
 
@@ -79,12 +67,12 @@
 
 #define USB_VID           0x239A
 #define USB_PID           0x0070
-#define USB_MANUFACTURER  "Drashna Jaelre"
-#define USB_PRODUCT       "Tractyl Manuform STM32F405"
+#define USB_MANUFACTURER  "WeAct Studio"
+#define USB_PRODUCT       "STM32F405 CoreBoard"
 
 #define UF2_PRODUCT_NAME  USB_MANUFACTURER " " USB_PRODUCT
-#define UF2_BOARD_ID      "Tractyl Manuform STM32F405"
-#define UF2_VOLUME_LABEL  "TMF405BOOT"
+#define UF2_BOARD_ID      "STM32F405-CoreBoard"
+#define UF2_VOLUME_LABEL  "STMF405BOOT"
 #define UF2_INDEX_URL     "https://github.com/WeActStudio/WeActStudio.STM32F4_64Pin_CoreBoard/tree/master"
 
 #define USB_NO_VBUS_PIN   1
